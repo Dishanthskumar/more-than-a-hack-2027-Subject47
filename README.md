@@ -125,30 +125,74 @@ The 47-feature model was better on all 7 DFL and all 3 Metrica matches.
 
 ## Rebuild
 
-**What you need:**
+**What you need:** Python 3.14 and the match data bundle (from enrolment in More than a Hack 2027).
 
-- numpy, pandas, scipy and scikit-learn. Tested with Python 3.14, scikit-learn 1.9.1 and scipy 1.18.1.
-- The same scikit-learn version, so the saved models load.
-- `kloppy` only for retraining with Metrica game 3.
-
-Clone the competition kit inside this repository and unpack the match data into `data/`:
+**1. Clone this repository and go into it:**
 
 ```
-<this repository>/
-  scripts/  src/barca/  cache/dfl/      from this repository
-  data/tactical/  data/broadcast/       the match data bundle (see data/README.md)
-  more-than-a-hack-2027/                git clone https://github.com/metrica-sports/more-than-a-hack-2027.git
+git clone https://github.com/<owner>/more-than-a-hack-2027-Subject47.git
+cd more-than-a-hack-2027-Subject47
 ```
 
-Both `data/` contents and the kit are ignored by git. The data may also stay in the kit's `data/` or wherever `MTAH_DATA_DIR` points.
-
-Then rebuild the main candidate:
+**2. Install the pinned packages:**
 
 ```
-python scripts/make_hybrid.py --final        # = --poss-model --dead-model --poss-decoder d1 --poss-model-file cache/dfl/poss_model_C_ctx.pkl -> submissions/subject47.csv
+pip install -r requirements.txt
 ```
 
-This writes the submission under the team's file name, `subject47.csv`, with the same bytes as `barca_hybrid_pmdx_d1_C_ctx.csv`.
+scikit-learn must be exactly 1.9.1, or the saved models will not load.
+
+**3. Clone the competition kit inside this repository:**
+
+```
+git clone https://github.com/metrica-sports/more-than-a-hack-2027.git
+```
+
+**4. Unpack the match data into `data/`,** keeping the folder and file names from the bundle (see `data/README.md`).
+
+When steps 1–4 are done, the folder looks like this:
+
+```
+more-than-a-hack-2027-Subject47/          <- this repository; run every command from here
+├─ scripts/make_hybrid.py                 the rebuild script
+├─ src/barca/                             the code it uses
+├─ cache/dfl/                             the 4 saved models
+├─ requirements.txt
+├─ data/
+│  ├─ README.md
+│  ├─ tactical/                           <- from the data bundle (step 4)
+│  │  ├─ BAR-ATH_tactical.mp4
+│  │  ├─ BAR-ATH_tactical_atd.xml
+│  │  ├─ BAR-ATH_tactical_atd.txt
+│  │  ├─ BAR-ATH_tactical_homography.csv
+│  │  └─ BAR-ATH_tactical_smart_tagging.xml
+│  └─ broadcast/                          <- from the data bundle (step 4)
+│     ├─ BAR-ATH_broadcast.mp4
+│     ├─ BAR-ATH_broadcast_atd.xml
+│     ├─ BAR-ATH_broadcast_atd.txt
+│     └─ BAR-ATH_broadcast_homography.csv
+└─ more-than-a-hack-2027/                 <- the competition kit (step 3)
+```
+
+The match data and the kit are ignored by git, so they cannot be committed by mistake.
+
+**5. Rebuild the submission:**
+
+```
+python scripts/make_hybrid.py --final
+```
+
+- **Output:** `submissions/subject47.csv`. It is created by the run.
+- **Printed check:** public spellF1 0.6429, macroF1 0.9256, 550 wrong frames.
+- **SHA-256:** must be `802177e4de6e044824935af750d90e8fed7e657a717eed3b7d7a102712d8b993`. Check it with `sha256sum submissions/subject47.csv` (Linux, macOS) or `Get-FileHash submissions\subject47.csv -Algorithm SHA256` (PowerShell).
+
+**6. Validate it with the competition's checker:**
+
+```
+python more-than-a-hack-2027/evaluation/validate_submission.py submissions/subject47.csv
+```
+
+`--final` is the submitted configuration: the possession model `cache/dfl/poss_model_C_ctx.pkl` with decoder D1, plus the stoppage model. Its output has the same bytes as `barca_hybrid_pmdx_d1_C_ctx.csv` in the table above.
 
 Other variants:
 
