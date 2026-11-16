@@ -9,6 +9,26 @@ The method, the possession rules, the training data, the validation and the limi
 
 The submission rebuilds with one command and gives the same bytes every time.
 
+## Results
+
+**Public 5-minute window** (frames 11185–18684, 17 possessions), used only as a check that the pipeline is correct:
+
+| | spellF1 (ranking) | macroF1 | Wrong frames (of 7,500) |
+|---|---|---|---|
+| Rule-based pipeline only | 0.560 | 0.905 | 739 |
+| **Submission (`subject47.csv`)** | **0.643** | **0.926** | **550** |
+
+**Held-out matches from the open data.** Every step was accepted on these, with leave-one-match-out tests, before it was checked on the public window:
+
+| Step | Held-out result, before → after |
+|---|---|
+| Learned possession model vs tracking rules (7 DFL matches) | spellF1 0.526 → 0.671, better on every match |
+| Decoder that keeps short possessions (3 Metrica matches) | spellF1 better on all 3 matches |
+| Context features, 47 instead of 25 (DFL / Metrica) | spellF1 0.689 / 0.674 → 0.724 / 0.712, better on all 10 matches |
+| Stoppage model extending the dead-ball rules (DFL) | alive/dead F1 0.695 → 0.819, false stoppages unchanged (7) |
+
+The public window holds only 17 possessions, and the organisers give it a noise band of about 0.04 spellF1. That is why the held-out matches, not the public window, decided each step. Details are in section 6 of the technical document.
+
 ## Rebuild the submission
 
 **What you need:** Python 3.14 and the match data bundle (from enrolment in More than a Hack 2027).
