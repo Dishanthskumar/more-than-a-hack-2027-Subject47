@@ -2,7 +2,9 @@
 
 # -- the competition kit and its gated data (cloned / unpacked locally, never committed) --------
 more-than-a-hack-2027/
-data/
+# data/ is committed empty, with only its README, so there is a place to unpack the bundle
+data/*
+!data/README.md
 *.mp4
 *_atd.txt
 *_atd.xml

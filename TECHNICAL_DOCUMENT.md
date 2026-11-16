@@ -191,7 +191,8 @@ The deciding results:
 **Requirements:**
 
 - **Python 3.14** with the pinned `requirements.txt`: numpy 2.5.4, pandas 3.1.0, scipy 1.18.1, scikit-learn 1.9.1. The saved models need exactly scikit-learn 1.9.1.
-- **The competition kit as `more-than-a-hack-2027/`** next to `scripts/`, `src/` and `cache/`, with its `data/`. The kit is not in this repository.
+- **The competition kit as `more-than-a-hack-2027/`** next to `scripts/`, `src/` and `cache/` (`git clone https://github.com/metrica-sports/more-than-a-hack-2027.git` inside this repository). The kit is not in this repository.
+- **The match data** unpacked into `data/` (`data/tactical/` and `data/broadcast/`, see `data/README.md`). The kit's own `data/` or `MTAH_DATA_DIR` also work. The data is not in this repository.
 
 **Steps:**
 

@@ -131,13 +131,16 @@ The 47-feature model was better on all 7 DFL and all 3 Metrica matches.
 - The same scikit-learn version, so the saved models load.
 - `kloppy` only for retraining with Metrica game 3.
 
-Put the folders next to the competition kit:
+Clone the competition kit inside this repository and unpack the match data into `data/`:
 
 ```
-<your folder>/
-  scripts/  src/barca/  cache/dfl/      from this share
-  more-than-a-hack-2027/                the competition kit, with data/tactical and data/broadcast
+<this repository>/
+  scripts/  src/barca/  cache/dfl/      from this repository
+  data/tactical/  data/broadcast/       the match data bundle (see data/README.md)
+  more-than-a-hack-2027/                git clone https://github.com/metrica-sports/more-than-a-hack-2027.git
 ```
+
+Both `data/` contents and the kit are ignored by git. The data may also stay in the kit's `data/` or wherever `MTAH_DATA_DIR` points.
 
 Then rebuild the main candidate:
 

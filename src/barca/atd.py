@@ -17,6 +17,13 @@ PROJECT = os.path.dirname(os.path.dirname(HERE))
 KIT = os.path.join(PROJECT, "more-than-a-hack-2027")
 sys.path.insert(0, KIT)
 from games import GAME, GAMES, require, source_frames  # noqa: E402
+import games as _games  # noqa: E402
+
+# Match data: MTAH_DATA_DIR if set, else this repository's data/ if the bundle is unpacked there,
+# else the kit's own data/ (games.py's default).
+REPO_DATA = os.path.join(PROJECT, "data")
+if not os.environ.get("MTAH_DATA_DIR") and os.path.isdir(os.path.join(REPO_DATA, "tactical")):
+    _games.DATA_DIR = REPO_DATA
 
 CACHE_DIR = os.environ.get("BARCA_CACHE") or os.path.join(PROJECT, "cache")
 N_SLOTS = 46
