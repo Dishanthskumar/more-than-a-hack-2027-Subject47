@@ -90,7 +90,7 @@ The **3 s** threshold is an approximation of "controlled possession". It was che
 | Broadcast tracking (ATD) + sync map | moments the broadcast cuts away (dead-ball evidence) | yes |
 | Smart Tagging `SET PIECES` | stoppage timing and restart location | yes |
 | Smart Tagging phases | team evidence in the earlier rule-based team layer | replaced by the possession model |
-| Homography, both videos | WASB video ball detector (HRNet), run on Kaggle GPUs over the tactical video | dropped (below) |
+| Homography, both videos | WASB video ball detector (HRNet) | dropped (below) |
 
 **Tried and dropped,** all under acceptance rules fixed before the run:
 
