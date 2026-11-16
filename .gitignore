@@ -1,0 +1,40 @@
+# This repository is public. The match data is licensed for the competition only and must not be in it.
+
+# -- the competition kit and its gated data (cloned / unpacked locally, never committed) --------
+more-than-a-hack-2027/
+data/
+*.mp4
+*_atd.txt
+*_atd.xml
+*_homography.csv
+*_smart_tagging.xml
+*_possession_gt*.csv
+
+# -- external open data (download it from the sources in the README) ---------------------------
+DFL/
+Metrica/
+SkillCorner/
+
+# -- generated: cache/ holds frame-level features built from the match data -------------------
+# Only the four saved models (trained on DFL and Metrica, no match data) are committed.
+cache/*
+!cache/dfl/
+cache/dfl/*
+!cache/dfl/poss_model.pkl
+!cache/dfl/poss_model_C.pkl
+!cache/dfl/poss_model_C_ctx.pkl
+!cache/dfl/dead_players_fair_model.pkl
+
+# -- generated: full-match label files and reports --------------------------------------------
+# A submission is rebuilt by `python scripts/make_hybrid.py --final`; its SHA-256 is in the README.
+submissions/
+reports/
+*.npz
+
+# -- Python / editors --------------------------------------------------------------------------
+__pycache__/
+*.pyc
+.venv/
+venv/
+.vscode/
+.idea/

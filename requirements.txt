@@ -1,0 +1,7 @@
+# Tested with Python 3.14.0. The saved models in cache/dfl/ need exactly scikit-learn 1.9.1.
+numpy==2.5.4
+pandas==3.1.0
+scipy==1.18.1
+scikit-learn==1.9.1
+# Only for retraining with Metrica sample game 3 (EPTS format):
+# kloppy==3.19.1
